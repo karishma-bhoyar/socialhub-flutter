@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "405166185627",
+    "project_id": "socialhub-b45ee",
+    "storage_bucket": "socialhub-b45ee.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:405166185627:android:0f95a982c578aa3e7d3a3e",
+        "android_client_info": {
+          "package_name": "com.example.flutter_application_socialhub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCYwmDT_-ARKr73voGcSi8b9M3PMkIYwSc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passwordController = TextEditingController();
-  final GlobalKey<FormState> formkey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool obsecurePassword = true;
   @override
   void dispose() {
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void onLoginPressed() {
-    final isValid = formkey.currentState?.validate() ?? false;
+    final isValid = formKey.currentState?.validate() ?? false;
     if (!isValid) {
       return;
     }
@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
           child: Padding(
             padding: const EdgeInsets.all(24),
             child: Form(
-              key: formkey,
+              key: formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

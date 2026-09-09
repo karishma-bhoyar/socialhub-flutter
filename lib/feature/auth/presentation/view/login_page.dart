@@ -1,12 +1,16 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_socialhub/core/constants/app_enums.dart';
+import 'package:flutter_application_socialhub/core/state/app_state.dart';
 import 'package:flutter_application_socialhub/core/theme/app_color.dart';
 import 'package:flutter_application_socialhub/core/theme/app_text_style.dart';
 import 'package:flutter_application_socialhub/core/utils/app_regexp.dart';
 import 'package:flutter_application_socialhub/core/widgets/app_button.dart';
 import 'package:flutter_application_socialhub/core/widgets/app_icon_button.dart';
 import 'package:flutter_application_socialhub/core/widgets/app_text_field.dart';
+import 'package:flutter_application_socialhub/feature/auth/domain/entities/auth_user_entity.dart';
+import 'package:flutter_application_socialhub/feature/auth/presentation/viewmodel/auth_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class LoginPage extends StatefulWidget {
@@ -58,119 +62,132 @@ class _LoginPageState extends State<LoginPage> {
     }
     final email = emailController.text.trim();
     final password = passwordController.text;
-    debugPrint('Email:$email');
-    debugPrint('Password:$password');
+    context.read<AuthCubit>().login(email: email, password: password);
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(24),
-            child: Form(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AppIconButton(icon: Icons.arrow_back_ios_new),
+    return BlocConsumer<AuthCubit, AppState<AuthUserEntity>>(
+      listener: (BuildContext context, AppState<AuthUserEntity> state) {
+        if (state.status == AppStatus.success) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text('Login successful')));
+        }
+        if (state.status == AppStatus.failure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(state.errorMessage ?? 'Login failed')),
+          );
+        }
+      },
+      builder: (context, state) => Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AppIconButton(icon: Icons.arrow_back_ios_new),
 
-                  const SizedBox(height: 50),
+                    const SizedBox(height: 50),
 
-                  Text('Welcome Back!', style: AppTextStyle.heading),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Login to continue to SocialHub',
-                    style: AppTextStyle.bodySecondary,
-                  ),
-                  SizedBox(height: 40),
-                  Text('Email', style: AppTextStyle.body),
-                  const SizedBox(height: 8),
-                  AppTextField(
-                    validator: validateEmail,
-                    controller: emailController,
-                    hintText: 'Enter Your email',
-                    keyboardType: TextInputType.emailAddress,
-                    prefixIcon: Icon(Icons.email_outlined),
-                  ),
-                  SizedBox(height: 20),
-                  Text('Password', style: AppTextStyle.body),
-                  SizedBox(height: 8),
-                  AppTextField(
-                    validator: validPassword,
-                    controller: passwordController,
-                    hintText: 'Enter Your password',
-                    onChanged: (value) {},
-                    obscureText: obsecurePassword,
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          obsecurePassword = !obsecurePassword;
-                        });
-                      },
-                      icon: obsecurePassword
-                          ? Icon(Icons.visibility_outlined)
-                          : Icon(Icons.visibility_off_outlined),
+                    Text('Welcome Back!', style: AppTextStyle.heading),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Login to continue to SocialHub',
+                      style: AppTextStyle.bodySecondary,
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Forgot Password?',
-                        style: AppTextStyle.bodySecondary.copyWith(
-                          color: AppColors.primary,
+                    SizedBox(height: 40),
+                    Text('Email', style: AppTextStyle.body),
+                    const SizedBox(height: 8),
+                    AppTextField(
+                      validator: validateEmail,
+                      controller: emailController,
+                      hintText: 'Enter Your email',
+                      keyboardType: TextInputType.emailAddress,
+                      prefixIcon: Icon(Icons.email_outlined),
+                    ),
+                    SizedBox(height: 20),
+                    Text('Password', style: AppTextStyle.body),
+                    SizedBox(height: 8),
+                    AppTextField(
+                      validator: validPassword,
+                      controller: passwordController,
+                      hintText: 'Enter Your password',
+                      onChanged: (value) {},
+                      obscureText: obsecurePassword,
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            obsecurePassword = !obsecurePassword;
+                          });
+                        },
+                        icon: obsecurePassword
+                            ? Icon(Icons.visibility_outlined)
+                            : Icon(Icons.visibility_off_outlined),
+                      ),
+                    ),
+                    SizedBox(height: 5),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          'Forgot Password?',
+                          style: AppTextStyle.bodySecondary.copyWith(
+                            color: AppColors.primary,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  AppButton(
-                    text: 'Login',
-                    onPressed: onLoginPressed,
-                    type: AppButtonType.primary,
-                  ),
-                  SizedBox(height: 20),
-                  Row(
-                    children: [
-                      Expanded(child: Divider()),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        child: Text('or continue with'),
-                      ),
-                      Expanded(child: Divider()),
-                    ],
-                  ),
-                  const SizedBox(height: 35),
-                  AppButton(
-                    type: AppButtonType.outlined,
-                    text: 'Google',
-                    icon: Icon(Icons.g_mobiledata, size: 28),
-                  ),
-                  const SizedBox(height: 35),
+                    SizedBox(height: 10),
+                    AppButton(
+                      text: 'Login',
+                      onPressed: onLoginPressed,
+                      type: AppButtonType.primary,
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Expanded(child: Divider()),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 12),
+                          child: Text('or continue with'),
+                        ),
+                        Expanded(child: Divider()),
+                      ],
+                    ),
+                    const SizedBox(height: 35),
+                    AppButton(
+                      type: AppButtonType.outlined,
+                      text: 'Google',
+                      icon: Icon(Icons.g_mobiledata, size: 28),
+                    ),
+                    const SizedBox(height: 35),
 
-                  Center(
-                    child: RichText(
-                      text: TextSpan(
-                        text: "Don't have an account? ",
-                        style: AppTextStyle.bodySecondary,
-                        children: [
-                          TextSpan(
-                            text: 'Sign Up',
-                            style: AppTextStyle.bodySecondary.copyWith(
-                              color: AppColors.primary,
-                              fontWeight: FontWeight.w600,
+                    Center(
+                      child: RichText(
+                        text: TextSpan(
+                          text: "Don't have an account? ",
+                          style: AppTextStyle.bodySecondary,
+                          children: [
+                            TextSpan(
+                              text: 'Sign Up',
+                              style: AppTextStyle.bodySecondary.copyWith(
+                                color: AppColors.primary,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                ],
+                    const SizedBox(height: 20),
+                  ],
+                ),
               ),
             ),
           ),

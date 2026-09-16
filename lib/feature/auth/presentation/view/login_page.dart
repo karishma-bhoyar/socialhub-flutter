@@ -1,5 +1,7 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_socialhub/app/router/app_router.dart';
 import 'package:flutter_application_socialhub/core/constants/app_enums.dart';
 import 'package:flutter_application_socialhub/core/state/app_state.dart';
 import 'package:flutter_application_socialhub/core/theme/app_color.dart';
@@ -70,9 +72,7 @@ class _LoginPageState extends State<LoginPage> {
     return BlocConsumer<AuthCubit, AppState<AuthUserEntity>>(
       listener: (BuildContext context, AppState<AuthUserEntity> state) {
         if (state.status == AppStatus.success) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text('Login successful')));
+          context.router.replace(const HomeRoute());
         }
         if (state.status == AppStatus.failure) {
           ScaffoldMessenger.of(context).showSnackBar(

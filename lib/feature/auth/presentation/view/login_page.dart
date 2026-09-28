@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_socialhub/app/router/app_router.dart';
@@ -90,29 +89,29 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AppIconButton(icon: Icons.arrow_back_ios_new),
+                    const AppIconButton(icon: Icons.arrow_back_ios_new),
 
                     const SizedBox(height: 50),
 
-                    Text('Welcome Back!', style: AppTextStyle.heading),
+                    const Text('Welcome Back!', style: AppTextStyle.heading),
                     const SizedBox(height: 8),
-                    Text(
+                    const Text(
                       'Login to continue to SocialHub',
                       style: AppTextStyle.bodySecondary,
                     ),
-                    SizedBox(height: 40),
-                    Text('Email', style: AppTextStyle.body),
+                    const SizedBox(height: 40),
+                    const Text('Email', style: AppTextStyle.body),
                     const SizedBox(height: 8),
                     AppTextField(
                       validator: validateEmail,
                       controller: emailController,
                       hintText: 'Enter Your email',
                       keyboardType: TextInputType.emailAddress,
-                      prefixIcon: Icon(Icons.email_outlined),
+                      prefixIcon: const Icon(Icons.email_outlined),
                     ),
-                    SizedBox(height: 20),
-                    Text('Password', style: AppTextStyle.body),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 20),
+                    const Text('Password', style: AppTextStyle.body),
+                    const SizedBox(height: 8),
                     AppTextField(
                       validator: validPassword,
                       controller: passwordController,
@@ -126,11 +125,11 @@ class _LoginPageState extends State<LoginPage> {
                           });
                         },
                         icon: obsecurePassword
-                            ? Icon(Icons.visibility_outlined)
-                            : Icon(Icons.visibility_off_outlined),
+                            ? const Icon(Icons.visibility_outlined)
+                            : const Icon(Icons.visibility_off_outlined),
                       ),
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Align(
                       alignment: Alignment.centerRight,
                       child: TextButton(
@@ -143,14 +142,14 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     AppButton(
                       text: 'Login',
                       onPressed: onLoginPressed,
                       type: AppButtonType.primary,
                     ),
-                    SizedBox(height: 20),
-                    Row(
+                    const SizedBox(height: 20),
+                    const Row(
                       children: [
                         Expanded(child: Divider()),
                         Padding(
@@ -161,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     const SizedBox(height: 35),
-                    AppButton(
+                    const AppButton(
                       type: AppButtonType.outlined,
                       text: 'Google',
                       icon: Icon(Icons.g_mobiledata, size: 28),

@@ -12,14 +12,21 @@ class HomeHeader extends StatelessWidget {
         Expanded(
           child: AppTextField(
             hintText: 'Search posts...',
-            prefixIcon: Icon(Icons.search, color: AppColors.textSecondary),
+            prefixIcon: const Icon(
+              Icons.search,
+              color: AppColors.textSecondary,
+            ),
             suffixIcon: IconButton(
               onPressed: () {},
-              icon: Icon(Icons.close, size: 20, color: AppColors.textSecondary),
+              icon: const Icon(
+                Icons.close,
+                size: 20,
+                color: AppColors.textSecondary,
+              ),
             ),
           ),
         ),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Container(
           height: 40,
           width: 40,
@@ -30,7 +37,7 @@ class HomeHeader extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications_none_outlined, size: 24),
+            icon: const Icon(Icons.notifications_none_outlined, size: 24),
           ),
         ),
       ],

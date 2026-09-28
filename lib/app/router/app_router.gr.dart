@@ -41,3 +41,19 @@ class LoginRoute extends PageRouteInfo<void> {
     },
   );
 }
+
+/// generated route for
+/// [UsersPage]
+class UsersRoute extends PageRouteInfo<void> {
+  const UsersRoute({List<PageRouteInfo>? children})
+    : super(UsersRoute.name, initialChildren: children);
+
+  static const String name = 'UsersRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const UsersPage();
+    },
+  );
+}

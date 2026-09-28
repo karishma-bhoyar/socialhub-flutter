@@ -4,6 +4,8 @@ import 'package:flutter_application_socialhub/app/di/injection.dart';
 import 'package:flutter_application_socialhub/app/router/app_router.dart';
 import 'package:flutter_application_socialhub/core/theme/app_theme.dart';
 import 'package:flutter_application_socialhub/feature/auth/presentation/viewmodel/auth_cubit.dart';
+import 'package:flutter_application_socialhub/feature/posts/presentation/viewmodel/post_cubit.dart';
+import 'package:flutter_application_socialhub/feature/users/presentation/viewmodel/user_cubit.dart';
 import 'package:flutter_application_socialhub/firebase_options.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,7 +18,11 @@ Future<void> main() async {
 
   runApp(
     MultiBlocProvider(
-      providers: [BlocProvider<AuthCubit>(create: (_) => sl<AuthCubit>())],
+      providers: [
+        BlocProvider<AuthCubit>(create: (_) => sl<AuthCubit>()),
+        BlocProvider<PostCubit>(create: (_) => sl<PostCubit>()),
+        BlocProvider<UserCubit>(create: (_) => sl<UserCubit>()),
+      ],
       child: MyApp(appRouter: appRouter),
     ),
   );

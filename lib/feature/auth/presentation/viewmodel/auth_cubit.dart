@@ -33,7 +33,7 @@ class AuthCubit extends Cubit<AppState<AuthUserEntity>> {
     emit(const AppState.loading());
     try {
       await authRepository.logout();
-      emit(AppState.initial());
+      emit(const AppState.initial());
     } catch (e) {
       emit(AppState.failure(e.toString()));
     }

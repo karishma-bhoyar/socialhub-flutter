@@ -19,7 +19,7 @@ class PostFilter extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: filters.length,
-        separatorBuilder: (_, _) => SizedBox(width: 10),
+        separatorBuilder: (_, _) => const SizedBox(width: 10),
 
         itemBuilder: (context, index) {
           final isSelected = selectedIndex == index;

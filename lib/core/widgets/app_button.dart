@@ -35,8 +35,8 @@ class AppButton extends StatelessWidget {
               ? AppColors.textSecondary
               : Colors.white,
           elevation: 0,
-          side: isOutline ? BorderSide(color: AppColors.border) : null,
-          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 14),
+          side: isOutline ? const BorderSide(color: AppColors.border) : null,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(14),
           ),
@@ -54,7 +54,7 @@ class AppButton extends StatelessWidget {
                   color: isOutline ? AppColors.primary : Colors.white,
                 ),
               )
-            : icon ?? SizedBox.shrink(),
+            : icon ?? const SizedBox.shrink(),
         label: Text(isLoading ? 'please wait..' : text),
       ),
     );

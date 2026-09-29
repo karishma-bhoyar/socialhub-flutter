@@ -35,11 +35,15 @@ class PostFilter extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Text(
-                filter,
-                style: AppTextStyle.body.copyWith(
-                  color: isSelected ? AppColors.surface : AppColors.textPrimary,
-                  fontWeight: FontWeight.w600,
+              child: Center(
+                child: Text(
+                  filter,
+                  style: AppTextStyle.body.copyWith(
+                    color: isSelected
+                        ? AppColors.surface
+                        : AppColors.textPrimary,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ),
             ),

@@ -67,6 +67,17 @@ class PostCard extends StatelessWidget {
             const SizedBox(height: 8),
 
             Text(post.body, style: AppTextStyle.bodySecondary),
+            const SizedBox(height: 12),
+
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16),
+              child: Image.network(
+                'https://picsum.photos/600/350',
+                width: double.infinity,
+                height: 200,
+                fit: BoxFit.cover,
+              ),
+            ),
           ],
         ),
       ),

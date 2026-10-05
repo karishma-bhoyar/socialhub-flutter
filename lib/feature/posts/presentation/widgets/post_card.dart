@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_socialhub/core/theme/app_color.dart';
 import 'package:flutter_application_socialhub/core/theme/app_text_style.dart';
 import 'package:flutter_application_socialhub/feature/posts/domain/entities/post_entity.dart';
+import 'package:flutter_application_socialhub/feature/posts/presentation/widgets/common_button.dart';
 import 'package:flutter_application_socialhub/feature/users/domain/entities/user_entity.dart';
 
 class PostCard extends StatelessWidget {
@@ -36,13 +37,21 @@ class PostCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        user.name,
-                        style: AppTextStyle.body.copyWith(
-                          color: AppColors.textPrimary,
-                          fontWeight: FontWeight.w600,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            user.name,
+                            style: AppTextStyle.body.copyWith(
+                              color: AppColors.textPrimary,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text('2h', style: AppTextStyle.bodySecondary),
+                        ],
                       ),
+
                       const SizedBox(height: 2),
                       Text(
                         '@${user.username}',
@@ -77,6 +86,16 @@ class PostCard extends StatelessWidget {
                 height: 200,
                 fit: BoxFit.cover,
               ),
+            ),
+            const SizedBox(height: 12),
+            CommonButton(
+              thumbUpCount: 24,
+              thumbUpOnpressed: () {},
+              commentCount: 12,
+              commentOnPressed: () {},
+              favoriteCount: 45,
+              favoriteOnPressed: () {},
+              bookmarkOnPressed: () {},
             ),
           ],
         ),
